@@ -1,16 +1,12 @@
 [
-    {
-        "name": "Dusting",
-        "description": "Dusting my Room",
-        "priority": "normal",
-        "status": "todo",
-        "type": "task"
-    },
-    {
-        "name": "Completion of Python Todo App",
-        "description": "Complete Python Todo app before today",
-        "priority": "urgent",
-        "status": "todo",
-        "type": "task"
-    }
+  {
+    "id": 1,
+    "task": "House chores",
+    "description": "do all the chores and make sure everything is done"
+  },
+  {
+    "id": 2,
+    "task": "House chores",
+    "description": "do all the chores and make sure everything is done"
+  }
 ]
