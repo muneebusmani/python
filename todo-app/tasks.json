@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Dusting",
+        "description": "Dusting my Room",
+        "priority": "normal",
+        "status": "todo",
+        "type": "task"
+    },
+    {
+        "name": "Completion of Python Todo App",
+        "description": "Complete Python Todo app before today",
+        "priority": "urgent",
+        "status": "todo",
+        "type": "task"
+    }
+]
