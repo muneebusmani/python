@@ -99,12 +99,22 @@ def list_tasks():
 def get_choice():
     print(
         """
-        Create new Task (1), Refresh Tasks(2), Update Task(3), Delete Task(4), exit(0)
-    """
+----------------------------------------------------------------------------------
+| Create new Task (1), Refresh Tasks(2), Update Task(3), Delete Task(4), exit(0) |
+----------------------------------------------------------------------------------
+"""
     )
     # Wait for key press without requiring Enter
     choice = msvcrt.getch()  # This captures a single keypress
     return int(choice.decode("utf-8"))
+
+
+def update_task():
+    print("hello")
+
+
+def delete_task():
+    print("hello")
 
 
 while True:
@@ -114,5 +124,9 @@ while True:
         create_task()
     elif selection == 2:
         list_tasks()
+    elif selection == 3:
+        update_task()
+    elif selection == 4:
+        delete_task()
     elif selection == 0:
         break
