@@ -1,4 +1,5 @@
 import json
+import msvcrt
 from tabulate import tabulate
 import os
 
@@ -29,28 +30,36 @@ def clear_terminal():
 
 def create_task():
 
+    # clear the clutter before proceeding
+    clear_terminal()
+
     # Input the Name of Task
     task = input(
         """
-        enter task name:
+        -------------------
+        | Enter task name:|
+        -------------------
         """
     )
 
     # Input the Description of Task
     description = input(
         """
-        enter task description
+        -------------------------
+        | Enter task description|
+        -------------------------
         """
     )
 
     # Load all tasks
-    data = load_tasks()
-
+    tasks = load_tasks()
+    max_id = max(task["id"] for task in tasks) if tasks else 0
+    id = max_id + 1
     # Append currently created task to existing tasks
-    data.append({"task": task, "description": description})
+    tasks.append({"Id": id, "task": task, "description": description})
 
     # Write the appended json to tasks.json file
-    save_tasks(data)
+    save_tasks(tasks)
     list_tasks()
 
 
@@ -78,25 +87,32 @@ def list_tasks():
             ]
         )
 
-        # Now finally printing that key less data with only values and headers from tablute library
-        print(
-            tabulate(
-                table_data,
-                headers=["Id", "Task", "Description"],
-            )
+    # Now finally printing that key less data with only values and headers from tablute library
+    print(
+        tabulate(
+            table_data,
+            headers=["Id", "Task", "Description"],
         )
+    )
+
+
+def get_choice():
+    print(
+        """
+        Create new Task (1), Refresh Tasks(2), Update Task(3), Delete Task(4), exit(0)
+    """
+    )
+    # Wait for key press without requiring Enter
+    choice = msvcrt.getch()  # This captures a single keypress
+    return int(choice.decode("utf-8"))
 
 
 while True:
-    selection = int(
-        input(
-            """
-        1. Create a Task
-        2. List all Task
-    """
-        )
-    )
+    list_tasks()
+    selection = get_choice()
     if selection == 1:
         create_task()
     elif selection == 2:
         list_tasks()
+    elif selection == 0:
+        break
