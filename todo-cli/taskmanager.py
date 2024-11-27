@@ -60,7 +60,6 @@ def clear_terminal():
 
 # function for creation of task
 def create_task():
-
     # clear the clutter before proceeding
     clear_terminal()
 
@@ -84,7 +83,6 @@ def create_task():
 
 # function for listing tasks
 def list_tasks():
-
     # clear the command line
     clear_terminal()
 
@@ -96,7 +94,6 @@ def list_tasks():
 
     # looping through each object{} in dictionary[]
     for task in data:
-
         # adding values of each task in each row for that table data
         table_data.append(
             [
@@ -117,7 +114,6 @@ def list_tasks():
 
 
 def list_task(id):
-
     # clear the command line
     clear_terminal()
 
@@ -129,7 +125,6 @@ def list_task(id):
 
     # looping through each object{} in dictionary[]
     for task in data:
-
         if task["id"] == id:
             # adding values of each task in each row for that table data
             table_data.append(
@@ -168,10 +163,8 @@ def find_task(id: int):
 
 def update_task(id):
     while True:
-
-        task: dict | None = {}
-        task = find_task(id)
-        if type(task) is not dict:
+        task: dict = find_task(id) or {}
+        if task == {}:
             print(
                 "Error in the specified task, either id is incorrect, or there is some issue with the json"
             )
@@ -183,11 +176,86 @@ def update_task(id):
         )
         if type(choice) is not int:
             print("Incorrect Choice, Please Try Again")
-        elif choice is 1:
+        elif choice == 1:
             new_name = input(frame_text("Enter new name"))
             old_name = task["task"]
-        # elif choice is 2:
-        # elif choice is 3:
+            print(
+                frame_text(
+                    f"""
+Old task: {old_name} 
+New task: {new_name}
+"""
+                )
+            )
+            sure = input(frame_text("\n Are you Sure? (Y/n)")).lower() or "y"
+
+            if sure == "y":
+                task["task"] = new_name
+                tasks = load_tasks()
+                for task_old in tasks:
+                    if task_old["id"] == task["id"]:
+                        task_old = task
+                save_tasks(tasks)
+            elif sure == "n":
+                break
+
+        elif choice == 2:
+            new_description = input(frame_text("Enter new description"))
+            old_description = task["description"]
+            print(
+                frame_text(
+                    f"""
+Old task: {old_description} 
+New task: {new_description}
+"""
+                )
+            )
+            sure = input(frame_text("\n Are you Sure? (Y/n)")).lower() or "y"
+
+            if sure == "y":
+                task["description"] = new_description
+                tasks = load_tasks()
+                for task_old in tasks:
+                    if task_old["id"] == task["id"]:
+                        task_old = task
+                save_tasks(tasks)
+            elif sure == "n":
+                break
+        elif choice == 3:
+            new_name = input(frame_text("Enter new name"))
+            new_description = input(frame_text("Enter new description"))
+            old_name = task["task"]
+            old_description = task["description"]
+            print(
+                frame_text(
+                    f"""
+Old task: {old_name} 
+New task: {new_name}
+"""
+                )
+            )
+            print("\n")
+            print(
+                frame_text(
+                    f"""
+Old task: {old_description} 
+New task: {new_description}
+"""
+                )
+            )
+
+            sure = input(frame_text("\n Are you Sure? (Y/n)")).lower() or "y"
+
+            if sure == "y":
+                task["task"] = new_name
+                tasks = load_tasks()
+                for task_old in tasks:
+                    if task_old["id"] == task["id"]:
+                        task_old = task
+                save_tasks(tasks)
+            elif sure == "n":
+                break
+
         # elif choice is 0:
 
 
